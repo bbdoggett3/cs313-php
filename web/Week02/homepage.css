@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+/*************************************
+* This is the style for homepage
+*************************************/
+body {
+	background-color: #fffcf2
+}
+h1 {
+	font-family: 'Roboto', sans-serif;
+
+}
+
+
+h3 {
+	text-align: center; 
+	font-family: Courier New, Times New Roman;
+}
+
+a {
+	text-decoration: none;
+	color:green;
+}
+
+a:hover {
+	color: darkblue;
+	
+}
+
+/**************************************
+* This is the style for assignment page
+***************************************/
+
+
+h4 {
+	text-align: center;
+	color: red;
+}
+
+#img_home {
+	display: block; 
+	margin-left: auto; 
+	margin-right: auto; 
+	width: 50%; 
+	border-style: solid; 
+	height: auto;
+	width: auto; 
+	max-width: 300px; 
+	max-height: 300px;"
+}
+
+#assign_list {
+	border-style: solid;
+	margin: auto;
+	width: auto;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border-width: 5px;
+	text-align: center;
+	list-style-position: inside;
+	
+}
