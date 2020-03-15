@@ -1,0 +1,15 @@
+{
+  "name": "cs313-weighttracker",
+  "version": "1.0.0",
+  "description": "This is my project for cs313 final",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benjamin Doggett",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^7.18.2"
+  }
+}
