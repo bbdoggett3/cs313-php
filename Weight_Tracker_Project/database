@@ -1,0 +1,33 @@
+
+#This will store the person using the weighttracker application and then store their info
+#in the database provided below.
+
+CREATE TABLE personID
+(
+	id SERIAL NOT NULL PRIMARY KEY,
+	first VARCHAR(100) NOT NULL,
+	last VARCHAR(100) NOT NULL,
+	startWeight INT NOT NULL,
+	goalWeight INT NOT NULL
+	
+);
+
+CREATE TABLE userProfile
+(
+	id SERIAL NOT NULL FOREIGN KEY,
+	userName VARCHAR(100) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	
+);
+
+
+
+#Here is the information for my first profile in my weight tracking application...
+
+INSERT INTO personid(first, last, startWeight, goalWeight) VALUES ('Benjamin', 'Doggett', '210', '175');
+
+#Since I'm using postgres I need to create some permissions for another user...
+
+CREATE USER weighttrackeruser WITH PASSWORD 'weightloss';
+GRANT SELECT, INSERT, UPDATE ON personid TO weighttrackeruser; 
+GRANT USAGE, SELECT ON SEQUENCE person_id_seq TO weighttrackeruser;
