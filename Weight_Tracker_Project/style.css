@@ -56,3 +56,13 @@ p {
 	text-decoration: none;
 	font-family: 'Fjalla One', sans-serif;
 }
+
+a {
+	text-decoration: none;
+}
+
+.credentials {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
