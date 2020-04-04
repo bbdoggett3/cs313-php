@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+    <title>Weight tracker sign in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--This is the header of my program that will be the same on all pages-->
+	<div class ="content">
+		<header>
+			<h1>Weight Tracker</h1>
+			<img src="https://cdn.glitch.com/875fcc3a-ee91-4d48-806c-d5b121d9c21c%2FCommon-Weightlifting-Mistakes_Featured-1.jpg?v=1584728216571">
+		</header>
+	</div>
+		<h3>User: bbdoggett3</h3>
+	<div>
+		
+	</div>
+
+	<div class ="container">
+		<div class ="header">
+			<div class="clear">
+				<i class="fa fa-refresh" aria-hidden="true"></i>
+			</div>
+
+			<div id="date"></div>
+		</div><!--END OF HEADER DIV-->
+
+		<div class="content">
+			<ul id="list">
+			</ul>
+
+			<div class="add-to-do">
+				<i class="fa fa-plus-circle" aria-hidden="true"></i>
+				<input type="text" id="input" placeholder="Add Current Weight">
+				<button type= "reset">Delete</button>
+
+				
+			</div><!--END OF ADD-ITEM DIV-->
+
+		</div><!--END OF CONTENT DIV-->
+
+	</div><!--END OF CONTAINER DIV-->
+
+<script type="text/javascript">
+
+	/**************************************
+	* I took a majority of the to-do-list
+	* aspects of my project in order to 
+	* produce this project.
+	***************************************/
+
+	//Select Elements
+	const clear = document.querySelector(".clear");
+	const dateElement = document.getElementById("date");
+	const list = document.getElementById("list");
+	const input = document.getElementById("input");
+
+	//Class names
+	const CHECK = "fa-check-circle";
+	const UNCHECK = "fa-circle-thin";
+	const LINE_THROUGH = "lineThrough";
+
+	//variables
+	let LIST, id;
+
+	//get from local storage
+	let data = localStorage.getItem("TODO");
+
+	//load items to the user's interface
+	function loadList(array) {
+		array.forEach(function(item) {
+			addToDo(item.name, item.id, item.done, item.trash);
+		});
+	}
+
+	//clear the local storage
+	clear.addEventListener("click", function(){
+		localStorage.clear();
+		location.reload();
+	});
+
+	//Show todays date
+	const options = {weekday : "long", month:"short", day:"numeric"};
+	const today = new Date();
+
+	dateElement.innerHTML = today.toLocaleDateString("en-US", options);
+
+	//Add-To-Do Function
+	function addToDo(toDo, id, done, trash) {
+		if(trash){return; }
+
+		const DONE = done ? CHECK : UNCHECK;
+		const LINE = done ? LINE_THROUGH : "";
+		const item =`<li class ="item">
+					<i class="fa ${DONE} co" job="complete" id="${id}"></i>
+					<p class="text ${LINE}">${toDo}</p>
+					<i class="fa fa-trash-o de" job="delete" id="${id}"></i>
+					</li>`;
+					
+	
+		const position = "beforeend";
+
+		list.insertAdjacentHTML(position, item);
+	}
+
+	//Add an item to the list
+	document.addEventListener("keyup", function(even){
+		if(event.keyCode == 13) {
+			const toDo = input.value;
+
+			//if the input isn't empty
+			if(toDo) {
+				addToDo(toDo, id, false, false);
+
+				LIST.push({
+					name : toDo,
+					id : id,
+					done : false,
+					trash : false
+				});
+
+				localStorage.setItem("TODO", JSON.stringify(LIST));
+				id++;
+			}
+			input.value = "";
+		}
+	});
+
+	//Function complete to-do-list
+	function completeToDo(element) {
+		element.classicList.toggle(CHECK);
+		element.classicList.toggle(UNCHECK);
+		element.parentNode.querySelector(".text").classicList.toggle(LINE_THROUGH);
+		LIST[element.id].done = LIST[element.id].done ? false : true;
+	}
+
+	//Remove to-do-list
+	function removeToDo(element) {
+		element.parentNode.parentNode.removeChild(element.parentNode);
+
+		LIST[element.id].trash = true;
+	}
+
+	//Target the items created dynamically
+	list. addEventListener("click", function(event) {
+		const element = event.target; //return the clicked element in the list.
+		const elementJob = element.attributes.job.value; //complete or delete.
+
+		if(elementJob == "complete") {
+			completeToDo(element);
+		} 
+		else if(elementJob =="delete"){
+			removeToDo(element);
+		}
+
+		localStorage.setItem("TODO", JSON.stringify(LIST));
+	});
+	
+
+</script>
+</body>
+</html>
